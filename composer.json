@@ -1,0 +1,31 @@
+{
+  "name": "drupal/webadmin",
+  "description": "Website Administration tools.",
+  "type": "drupal-module",
+  "homepage": "https://www.drupal.org/project/webpage",
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Webship",
+      "homepage": "http://webship.org",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/webadmin",
+    "source": "http://cgit.drupalcode.org/webadmin"
+  },
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  },
+  "require": {
+    "drupal/admin_toolbar": "~2.0",
+    "drupal/views_bulk_operations": "~3.0",
+    "drupal/views_bulk_edit": "~2.0",
+    "drupal/masquerade": "~2.0"
+  }
+}
