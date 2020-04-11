@@ -6,6 +6,7 @@ dependencies:
   - drupal:content_moderation
   - drupal:workflows
   - drupal:toolbar
+  - drupal:shortcut
   - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_tools
   - admin_toolbar:admin_toolbar_links_access_filter
