@@ -23,9 +23,9 @@
     }
   },
   "require": {
-    "drupal/admin_toolbar": "~2.0",
-    "drupal/views_bulk_operations": "~3.0",
-    "drupal/views_bulk_edit": "~2.0",
-    "drupal/masquerade": "~2.0"
+    "drupal/admin_toolbar": "@stable",
+    "drupal/views_bulk_operations": "@stable",
+    "drupal/views_bulk_edit": "@stable",
+    "drupal/masquerade": "@stable"
   }
 }
