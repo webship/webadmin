@@ -10,3 +10,4 @@ Website Administration tools.
 * [Gin Toolbar](https://www.drupal.org/project/gin_toolbar): ~1.0
 * [Gin Login](https://www.drupal.org/project/gin_login): ~1.0
 * [Gin Layout Builder](https://www.drupal.org/project/gin_lb): ~1.0
+* [Dashboards with Layout Builder](https://www.drupal.org/project/dashboards): ~2.0

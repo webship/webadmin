@@ -14,4 +14,7 @@ dependencies:
   - views_bulk_edit:views_bulk_edit
   - masquerade:masquerade
   - gin_toolbar:gin_toolbar
+  - drupal:layout_builder
+  - gin_lb:gin_lb
+  - dashboards:dashboards
 
