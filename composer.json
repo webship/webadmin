@@ -23,10 +23,10 @@
     }
   },
   "require": {
-    "drupal/core": "~9.0",
     "drupal/admin_toolbar": "@stable",
     "drupal/views_bulk_operations": "@stable",
     "drupal/views_bulk_edit": "@stable",
-    "drupal/masquerade": "@stable"
+    "drupal/masquerade": "@stable",
+    "drupal/core": "~9.0 || ^10"
   }
 }
