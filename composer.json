@@ -23,10 +23,14 @@
     }
   },
   "require": {
+    "drupal/core": "~9.0 || ^10",
     "drupal/admin_toolbar": "@stable",
     "drupal/views_bulk_operations": "@stable",
     "drupal/views_bulk_edit": "@stable",
     "drupal/masquerade": "@stable",
-    "drupal/core": "~9.0 || ^10"
+    "drupal/gin": "~3.0",
+    "drupal/gin_toolbar": "~1.0",
+    "drupal/gin_login": "~1.2",
+    "drupal/gin_lb": "~1.0"
   }
 }
