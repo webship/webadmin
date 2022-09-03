@@ -23,7 +23,7 @@
     }
   },
   "require": {
-    "drupal/core": "~9.0 || ^10",
+    "drupal/core": "^10",
     "drupal/admin_toolbar": "~3.0",
     "drupal/views_bulk_operations": "~4.0",
     "drupal/views_bulk_edit": "~2.0",
