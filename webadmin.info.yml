@@ -15,5 +15,4 @@ dependencies:
   - masquerade:masquerade
   - gin_toolbar:gin_toolbar
   - drupal:layout_builder
-  - gin_lb:gin_lb
   - dashboards:dashboards
