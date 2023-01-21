@@ -1,18 +1,17 @@
 name: Web Admin
 type: module
 description: 'Website Administration tools.'
-core_version_requirement: ^10
+core_version_requirement: ~10.0
 dependencies:
   - drupal:content_moderation
   - drupal:workflows
   - drupal:toolbar
   - drupal:shortcut
+  - drupal:layout_builder
   - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_tools
   - admin_toolbar:admin_toolbar_links_access_filter
   - views_bulk_operations:views_bulk_operations
   - views_bulk_edit:views_bulk_edit
-  - masquerade:masquerade
   - gin_toolbar:gin_toolbar
-  - drupal:layout_builder
   - dashboards:dashboards
