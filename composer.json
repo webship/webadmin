@@ -23,14 +23,14 @@
     }
   },
   "require": {
-    "drupal/core": "~10.0",
-    "drupal/admin_toolbar": "~3.0",
-    "drupal/views_bulk_operations": "~4.0",
+    "drupal/core": "~10.1.0",
+    "drupal/admin_toolbar": "~3.4.0",
+    "drupal/views_bulk_operations": "~4.2.0",
     "drupal/views_bulk_edit": "~2.0",
     "drupal/masquerade": "~2.0",
     "drupal/gin": "~3.0",
     "drupal/gin_toolbar": "~1.0",
-    "drupal/gin_login": "~1.0",
-    "drupal/dashboards": "~2.0"
+    "drupal/gin_login": "~2.0.0",
+    "drupal/dashboards": "~2.1.0"
   }
 }
