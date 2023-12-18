@@ -1,7 +1,7 @@
 name: Web Admin
+description: Website Administration tools.
 type: module
-description: 'Website Administration tools.'
-core_version_requirement: ~10.0
+core_version_requirement: ~10.2.0
 dependencies:
   - drupal:content_moderation
   - drupal:workflows
