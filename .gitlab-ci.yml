@@ -112,6 +112,7 @@ stages:
       - vendor/
   script:
       - composer config minimum-stability dev
+      - composer config bin-dir bin
       - composer config --no-plugins allow-plugins.composer/installers true
       - composer config --no-plugins allow-plugins.cweagans/composer-patches true
       - composer config --no-plugins allow-plugins.oomphinc/composer-installers-extender true
@@ -136,10 +137,12 @@ stages:
   <<: [ *with-composer-cache, *default-job-settings-lint ]
   stage: 🪄 Lint
   script:
-    - php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=.phpcs.xml src
+    - vendor/bin/phpcs --version
+    - php vendor/bin/phpcs --version --standard=.phpcs.xml .
 
 '🧹 PHP Static Analysis (phpstan)':
   <<: [ *with-composer-cache, *default-job-settings-lint ]
   stage: 🪄 Lint
   script:
+    - vendor/bin/phpstan --version
     - php vendor/bin/phpstan analyze --configuration=phpstan.neon
