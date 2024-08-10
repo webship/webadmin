@@ -1,18 +1,142 @@
-
-include:
+include: 
   - project: $_GITLAB_TEMPLATES_REPO
     ref: $_GITLAB_TEMPLATES_REF
     file:
-      - "/includes/include.drupalci.main.yml"
-      - "/includes/include.drupalci.variables.yml"
-      - "/includes/include.drupalci.workflows.yml"
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
 variables:
-  OPT_IN_TEST_PREVIOUS_MAJOR: 1
-  OPT_IN_TEST_PREVIOUS_MINOR: 1
-  OPT_IN_TEST_NEXT_MINOR: 1
-  OPT_IN_TEST_NEXT_MAJOR: 1
-  OPT_IN_TEST_MAX_PHP: 1
-phpcs:
+  COMPOSER: composer.json
+  COMPOSER_ROOT_VERSION: "${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}${CI_COMMIT_BRANCH}-dev"
+
+#############
+# Stages    #
+#############
+stages:
+  - 🏗️ Build
+  - 🪄 Lint
+  - 🗜️ Test
+
+#############
+# Templates #
+#############
+
+.default-job-settings: &default-job-settings-lint
+  interruptible: true
   allow_failure: false
-stylelint:
-  allow_failure: false
+  variables:
+    _TARGET_PHP: "8.2"
+    _TARGET_DB: "mysql-8"
+  image:
+    name: $_CONFIG_DOCKERHUB_ROOT/php-$_TARGET_PHP-apache:production
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_PROJECT_ROOT_NAMESPACE == "project"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+.composer-cache: &composer-cache
+  key:
+    files:
+      - ./composer.json
+      - ./composer.lock
+  paths:
+    - ./vendor
+
+.yarn-cache: &yarn-cache
+  key:
+    files:
+      - ./package.json
+      - ./yarn.lock
+  paths:
+    - ./node_modules
+
+.with-composer-cache: &with-composer-cache
+  cache:
+    policy: pull
+    <<: *composer-cache
+  dependencies:
+    - '📦️ Composer'
+
+.with-yarn-cache: &with-yarn-cache
+  dependencies:
+    - '📦️ Yarn'
+  cache:
+    policy: pull
+    <<: *yarn-cache
+
+.default-stage: &default-stage
+  stage: 🗜️ Test
+  trigger:
+    strategy: depend
+    include:
+      - local: .gitlab-ci/pipeline.yml
+
+.run-on-commit: &run-on-commit
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_PROJECT_ROOT_NAMESPACE == "project"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+      allow_failure: true
+
+.run-daily: &run-daily
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $CI_PROJECT_ROOT_NAMESPACE == "project"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+      allow_failure: true
+'PHP 8.2 MySQL 8':
+  <<: *default-stage
+  variables:
+    _TARGET_PHP: "8.2"
+    _TARGET_DB: "mysql-8"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_PROJECT_ROOT_NAMESPACE == "project"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+'PHP 8.3 MySQL 8':
+  <<: [ *default-stage, *run-on-commit ]
+  variables:
+    _TARGET_PHP: "8.3"
+    _TARGET_DB: "mysql-8"
+'PHP 8.4 MySQL 8':
+  <<: [ *default-stage, *run-on-commit ]
+  variables:
+    _TARGET_PHP: "8.4"
+    _TARGET_DB: "mysql-8"
+'📦️ Composer':
+  <<: *default-job-settings-lint
+  stage: 🏗️ Build
+  cache:
+    <<: *composer-cache
+  artifacts:
+    expire_in: 1 week
+    expose_as: 'composer-vendor'
+    paths:
+      - vendor/
+  script:
+      - composer config minimum-stability dev
+      - composer config --no-plugins allow-plugins.phpstan/extension-installer true
+      - composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+      - composer validate
+      - composer install
+
+'📦️ Yarn':
+  <<: *default-job-settings-lint
+  stage: 🏗️ Build
+  cache:
+    <<: *yarn-cache
+  artifacts:
+    expire_in: 1 week
+    expose_as: 'yarn-node_modules'
+    paths:
+      - node_modules/
+  script:
+    - yarn install
+'🧹 PHP Coding standards (PHPCS)':
+  <<: [ *with-composer-cache, *default-job-settings-lint ]
+  stage: 🪄 Lint
+  script:
+    - php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=.phpcs.xml src
+
+'🧹 PHP Static Analysis (phpstan)':
+  <<: [ *with-composer-cache, *default-job-settings-lint ]
+  stage: 🪄 Lint
+  script:
+    - php vendor/bin/phpstan analyze --configuration=phpstan.neon
