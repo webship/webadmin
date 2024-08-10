@@ -1,0 +1,26 @@
+# Configuration file for PHPStan static code checking, see https://phpstan.org .
+includes:
+  - phar://phpstan.phar/conf/bleedingEdge.neon
+
+parameters:
+
+  level: 1
+
+  paths:
+    - config
+    - src
+    - entityqueue_form_widget.info.yml
+    - entityqueue_form_widget.module
+    - entityqueue_form_widget.routing.yml
+    - README.md
+
+  excludePaths:
+    - web/*
+    - vendor/*
+    - node_modules/*
+    - tests/*
+    - yarn.lock
+
+  ignoreErrors:
+    - '#Call to static method loadMultiple\(\) on an unknown class#'
+
