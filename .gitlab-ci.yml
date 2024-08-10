@@ -113,11 +113,16 @@ stages:
   script:
       - composer config minimum-stability dev
       - composer config bin-dir bin
+      - composer require drupal/core-dev --no-install
       - composer config --no-plugins allow-plugins.composer/installers true
       - composer config --no-plugins allow-plugins.cweagans/composer-patches true
       - composer config --no-plugins allow-plugins.oomphinc/composer-installers-extender true
+      - composer config --no-plugins allow-plugins.drupal/core-composer-scaffold true
+      - composer config --no-plugins allow-plugins.rupal/core-project-message true
       - composer config --no-plugins allow-plugins.phpstan/extension-installer true
       - composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+      - composer config --no-plugins allow-plugins.php-http/discovery true
+      - composer config --no-plugins allow-plugins.pyrech/composer-changelogs true
       - composer validate
       - composer install
 
@@ -137,12 +142,12 @@ stages:
   <<: [ *with-composer-cache, *default-job-settings-lint ]
   stage: 🪄 Lint
   script:
-    - vendor/bin/phpcs --version
-    - php vendor/bin/phpcs --version --standard=.phpcs.xml .
+    - ./bin/phpcs --version
+    - php ./bin/phpcs --version --standard=.phpcs.xml .
 
 '🧹 PHP Static Analysis (phpstan)':
   <<: [ *with-composer-cache, *default-job-settings-lint ]
   stage: 🪄 Lint
   script:
-    - vendor/bin/phpstan --version
-    - php vendor/bin/phpstan analyze --configuration=phpstan.neon
+    - ./bin/phpstan --version
+    - php ./bin/phpstan analyze --configuration=phpstan.neon
