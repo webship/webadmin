@@ -3,7 +3,7 @@
 Website Administration tools.
 
 * [Admin Toolbar](https://www.drupal.org/project/admin_toolbar): ~3.4.0
-* [Views Bulk Operations](https://www.drupal.org/project/views_bulk_operations): ~4.2.0
+* [Views Bulk Operations](https://www.drupal.org/project/views_bulk_operations): ~4.3.0
 * [Views Bulk Edit](https://www.drupal.org/project/views_bulk_edit): ~2.0
 * [Masquerade](https://www.drupal.org/project/masquerade): ~2.0
 * [Gin Admin Theme](https://www.drupal.org/project/gin): ~3.0
