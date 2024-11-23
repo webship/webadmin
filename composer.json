@@ -27,7 +27,7 @@
     "drupal/webpatches": "~10.0",
     "drupal/admin_toolbar": "~3.5.0",
     "drupal/views_bulk_operations": "~4.3.0",
-    "drupal/views_bulk_edit": "~2.0",
+    "drupal/views_bulk_edit": "~3.0",
     "drupal/masquerade": "~2.0",
     "drupal/gin": "~3.0",
     "drupal/gin_toolbar": "~1.0",
