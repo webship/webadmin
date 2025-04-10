@@ -2,7 +2,6 @@
 
 Website Administration tools.
 
-* [Admin Toolbar](https://www.drupal.org/project/admin_toolbar): ~3.5.0
 * [Views Bulk Operations](https://www.drupal.org/project/views_bulk_operations): ~4.3.0
 * [Views Bulk Edit](https://www.drupal.org/project/views_bulk_edit): ~3.0
 * [Masquerade](https://www.drupal.org/project/masquerade): ~2.0

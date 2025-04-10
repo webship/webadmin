@@ -8,9 +8,6 @@ dependencies:
   - drupal:toolbar
   - drupal:shortcut
   - drupal:layout_builder
-  - admin_toolbar:admin_toolbar
-  - admin_toolbar:admin_toolbar_tools
-  - admin_toolbar:admin_toolbar_links_access_filter
   - views_bulk_operations:views_bulk_operations
   - views_bulk_edit:views_bulk_edit
   - gin_toolbar:gin_toolbar
