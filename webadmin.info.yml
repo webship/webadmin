@@ -10,5 +10,4 @@ dependencies:
   - drupal:layout_builder
   - views_bulk_operations:views_bulk_operations
   - views_bulk_edit:views_bulk_edit
-  - gin_toolbar:gin_toolbar
   - dashboards:dashboards

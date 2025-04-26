@@ -1,0 +1,93 @@
+langcode: en
+status: true
+dependencies: {  }
+id: editorial_dashboard
+admin_label: 'Editorial Dashboard'
+category: ''
+frontend: false
+weight: 1
+sections:
+  -
+    layout_id: layout_3
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+      reverse: 0
+    components:
+      159cad57-7d3f-410c-b44d-2442e55d146c:
+        uuid: 159cad57-7d3f-410c-b44d-2442e55d146c
+        region: one
+        configuration:
+          id: 'views_block:who_s_online-who_s_online_block'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 2
+        additional: {  }
+      f69be1ab-691b-4b59-8096-eaddb562ec82:
+        uuid: f69be1ab-691b-4b59-8096-eaddb562ec82
+        region: one
+        configuration:
+          id: 'dashboards_block:dashboard:account'
+          label: 'Show current user'
+          label_display: '0'
+          provider: dashboards
+          view_mode: default
+          context_mapping: {  }
+        weight: 1
+        additional: {  }
+      4c4ea215-d60a-4055-b25b-edd8c219b399:
+        uuid: 4c4ea215-d60a-4055-b25b-edd8c219b399
+        region: one
+        configuration:
+          id: 'dashboards_block:dashboard:add_content_menu'
+          label: 'Add content'
+          label_display: visible
+          provider: dashboards
+          context_mapping: {  }
+          items:
+            webpage:
+              weight: '0'
+        weight: 0
+        additional: {  }
+      6a3dcb10-4528-46cc-bd62-d106b94d7746:
+        uuid: 6a3dcb10-4528-46cc-bd62-d106b94d7746
+        region: two
+        configuration:
+          id: 'dashboards_block:dashboard:view_embed'
+          label: 'Last content'
+          label_display: visible
+          provider: dashboards
+          context_mapping: {  }
+          view: 'dashboard_last_content:embed_1'
+        weight: 1
+        additional: {  }
+      00eecfcf-a160-40d6-a1fa-a224dde93fb3:
+        uuid: 00eecfcf-a160-40d6-a1fa-a224dde93fb3
+        region: two
+        configuration:
+          id: 'dashboards_block:dashboard:view_embed'
+          label: 'My content'
+          label_display: visible
+          provider: dashboards
+          context_mapping: {  }
+          view: 'dashboard_last_content:embed_2'
+        weight: 2
+        additional: {  }
+      bc182a98-07e7-42e2-92a0-19f8228268c5:
+        uuid: bc182a98-07e7-42e2-92a0-19f8228268c5
+        region: two
+        configuration:
+          id: 'views_block:content_recent-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+    third_party_settings: {  }
