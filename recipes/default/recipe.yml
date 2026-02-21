@@ -1,0 +1,17 @@
+name: Web Admin - Default
+description: A recipe to manage default installed modules, configs and permissions.
+type: install
+install:
+  - content_moderation
+  - workflows
+  - toolbar
+  - shortcut
+  - layout_builder
+  - navigation
+  - views_bulk_operations
+  - views_bulk_edit
+  - dashboards
+config:
+  strict: false
+  import:
+    dashboards: '*'
