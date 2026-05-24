@@ -5,7 +5,7 @@
   "license": "GPL-2.0",
   "engines": {
     "yarn": ">= 1.6",
-    "node": ">= 18.0"
+    "node": ">= 20.0"
   },
   "keywords": [
     "Drupal",
@@ -18,11 +18,12 @@
     "phpcbf": "phpcbf --standard=./.phpcs.xml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js .",
     "lint:css": "stylelint \"**/*.css\"",
-    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --ext .yml ."
+    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --ext .yml .",
+    "test": "cucumber-js --config cucumber.js",
+    "test:headed": "HEADLESS=false cucumber-js --config cucumber.js"
   },
   "dependencies": {  },
   "devDependencies": {
-    "webship-js": "~1",
     "eslint": "~8",
     "eslint-config-airbnb-base": "~15",
     "eslint-config-prettier": "~8",
@@ -53,7 +54,8 @@
     "terser-webpack-plugin": "~5",
     "underscore": "~1",
     "webpack": "~5",
-    "webpack-cli": "~5"
+    "webpack-cli": "~5",
+    "webship-js": "~2.0"
   },
   "browserslist": [
     "last 2 Chrome major versions",

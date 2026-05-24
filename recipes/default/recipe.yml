@@ -10,8 +10,20 @@ install:
   - navigation
   - views_bulk_operations
   - views_bulk_edit
+  - masquerade
+  # The Gin administration theme must be installed before the Gin Toolbar and
+  # Gin Login modules, which build on it.
+  - gin
+  - gin_toolbar
+  - gin_login
   - dashboards
 config:
   strict: false
   import:
     dashboards: '*'
+  actions:
+    # Use Gin as the administration (back-end) theme. This is the headline of
+    # the Web Admin module: a polished, productive admin experience.
+    system.theme:
+      simpleConfigUpdate:
+        admin: gin
