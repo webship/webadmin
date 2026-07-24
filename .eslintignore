@@ -1,3 +1,14 @@
 node_modules/**/*
 # Ignore deliberately malformed YAML files.
 drupalci.yml
+node_modules/
+.yarn/
+vendor/
+web/
+*.min.js
+*.map
+.eslintcache
+.gitlab-ci-local/
+tests/reports/
+tests/screenshots/
+tests/videos/

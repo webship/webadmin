@@ -16,9 +16,9 @@
   "scripts": {
     "phpcs": "phpcs --standard=./.phpcs.xml .",
     "phpcbf": "phpcbf --standard=./.phpcs.xml .",
-    "lint:js": "node ./node_modules/eslint/bin/eslint.js .",
+    "lint:js": "node ./node_modules/eslint/bin/eslint.js --cache --cache-location .eslintcache .",
     "lint:css": "stylelint \"**/*.css\"",
-    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --ext .yml .",
+    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --cache --cache-location .eslintcache --ext .yml .",
     "test": "cucumber-js --config cucumber.js",
     "test:headed": "HEADLESS=false cucumber-js --config cucumber.js"
   },

@@ -21,6 +21,20 @@ config:
   strict: false
   import:
     dashboards: '*'
+    # Config entities (like a shortcut set) are not created automatically
+    # when a module is installed through a recipe: Recipe installs run with
+    # the config installer in "syncing" mode, which only creates simple
+    # config, not config entities, from a module's config/install directory
+    # (see Drupal\Core\Recipe\RecipeRunner::installModules()). Without this,
+    # no default shortcut set exists, and Drupal\navigation\ShortcutLazyBuilder
+    # (used by the Navigation module this recipe also installs) throws a
+    # fatal TypeError for every authenticated user on every page:
+    # "Drupal\shortcut\ShortcutSetStorage::getDisplayedToUser(): Return
+    # value must be of type Drupal\shortcut\ShortcutSetInterface, null
+    # returned". Explicitly importing it here creates the set that ships in
+    # Drupal core's shortcut module (shortcut/config/install/shortcut.set.default.yml).
+    shortcut:
+      - shortcut.set.default
   actions:
     # Use Gin as the administration (back-end) theme. This is the headline of
     # the Web Admin module: a polished, productive admin experience.

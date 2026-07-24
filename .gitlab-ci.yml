@@ -29,12 +29,33 @@ cspell:
   allow_failure: true
 
 # Node 20+ required: webship-js >=2.0 declares engines.node ">=20".
-eslint:
-  stage: validate
+# Shared setup for the fast lint jobs (eslint, stylelint).
+#   1. `dependencies: []` skips the composer build artifact (the full Drupal
+#      tree) so the lint jobs don't download and walk thousands of vendor/
+#      files -- the main slowdown.
+#   2. `yarn install --mode=skip-build` skips postinstall (incl. webship-js
+#      pulling Playwright). Install drops to ~10s.
+#   3. Lockfile-keyed cache of `.yarn/cache` reused by later pipelines.
+# The paired .eslintignore excludes vendor/, .yarn/, web/ so `eslint .` only
+# lints real module source.
+.lint-yarn:
   image: node:20
+  dependencies: []
+  variables:
+    YARN_ENABLE_GLOBAL_CACHE: "false"
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - .yarn/cache
   before_script:
     - corepack enable
-    - yarn install
+    - yarn install --mode=skip-build
+
+eslint:
+  extends: .lint-yarn
+  stage: validate
   script:
     - yarn lint:js || true
     - yarn lint:yaml || true
@@ -43,11 +64,8 @@ eslint:
   allow_failure: true
 
 stylelint:
+  extends: .lint-yarn
   stage: validate
-  image: node:20
-  before_script:
-    - corepack enable
-    - yarn install
   script:
     - yarn lint:css || true
   after_script:
