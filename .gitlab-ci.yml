@@ -7,6 +7,9 @@ include:
       - "/includes/include.drupalci.workflows.yml"
 
 variables:
+  # For now, build and test with Drupal 11.4 and PHP 8.4.
+  DRUPAL_CORE: "11.4.x-dev"
+  _TARGET_PHP: "8.4"
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
   # No yarn.lock is committed; Yarn 4 defaults to immutable installs and would
@@ -16,7 +19,6 @@ variables:
 # Override the default composer job to use development versions
 composer:
   variables:
-    DRUPAL_CORE: $CORE_SUPPORTED
     IGNORE_PROJECT_DRUPAL_CORE_VERSION: 0
 
 cspell:
@@ -111,12 +113,18 @@ stylelint:
     # ── Database ────────────────────────────────────────────────────────────
     - export SIMPLETEST_DB=mysql://$MYSQL_USER:$MYSQL_PASSWORD@database/$MYSQL_DATABASE
     # ── Drupal site install ─────────────────────────────────────────────────
+    # Standard gives the Content editor role, Views UI and the blocks the
+    # scenarios use. It also installs the Navigation module, which Web Admin
+    # does not use: uninstall it, so the suite checks Web Admin without it.
     - $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT site:install standard
         --db-url=$SIMPLETEST_DB
         --account-name=webmaster
         --account-pass=dD.123123ddd
         --site-name="Web Admin Test"
         -y
+    - if $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:list --status=enabled --field=name | grep -qx navigation; then
+        $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:uninstall navigation -y;
+      fi
     # ── Module install ──────────────────────────────────────────────────────
     - $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT en webadmin -y
     - $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild

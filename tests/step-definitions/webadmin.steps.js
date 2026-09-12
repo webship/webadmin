@@ -114,7 +114,7 @@ Then(/^(?:I |we )?should see the button "([^"]*)"$/, async function (text) {
 /**
  * Assert that the response of a path is the given HTTP status code.
  *
- * Example #1: Then the response status of "/admin/dashboard" should be 200
+ * Example #1: Then the response status of "/admin/content" should be 200
  * Example #2: Then the response status of "/admin/people/masquerade" should be 200
  */
 Then(/^the response status of "([^"]+)" should be (\d+)$/, async function (path, status) {

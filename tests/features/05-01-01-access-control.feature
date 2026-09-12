@@ -13,11 +13,6 @@ Feature: Access control for Web Admin pages
     When I navigate to "/admin/people"
     Then I should see "Access denied"
 
-  Scenario: Anonymous user cannot access the dashboard configuration
-    Given I am an anonymous user
-    When I navigate to "/admin/structure/dashboard"
-    Then I should see "Access denied"
-
   Scenario: Anonymous user cannot access the workflows config
     Given I am an anonymous user
     When I navigate to "/admin/config/workflow/workflows"

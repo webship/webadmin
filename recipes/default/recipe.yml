@@ -6,7 +6,6 @@ install:
   - workflows
   - toolbar
   - shortcut
-  - navigation
   - views_bulk_operations
   - views_bulk_edit
   - masquerade
@@ -15,40 +14,35 @@ install:
   - gin
   - gin_toolbar
   - gin_login
-  # The Dashboard module of Drupal CMS: Webmaster, Editorial and Management
-  # dashboards in recipes/default/config.
-  - dashboard
 config:
   strict: false
   import:
-    # The views of the dashboards (optional config is not installed by recipes).
-    dashboard:
-      - views.view.dashboard_content
-    node:
-      - views.view.content_recent
-    user:
-      - views.view.who_s_online
     # Config entities (like a shortcut set) are not created automatically
     # when a module is installed through a recipe: Recipe installs run with
     # the config installer in "syncing" mode, which only creates simple
     # config, not config entities, from a module's config/install directory
     # (see Drupal\Core\Recipe\RecipeRunner::installModules()). Without this,
-    # no default shortcut set exists, and Drupal\navigation\ShortcutLazyBuilder
-    # (used by the Navigation module this recipe also installs) throws a
-    # fatal TypeError for every authenticated user on every page:
-    # "Drupal\shortcut\ShortcutSetStorage::getDisplayedToUser(): Return
-    # value must be of type Drupal\shortcut\ShortcutSetInterface, null
-    # returned". Explicitly importing it here creates the set that ships in
-    # Drupal core's shortcut module (shortcut/config/install/shortcut.set.default.yml).
+    # no default shortcut set exists, and the shortcuts of the toolbar have
+    # no set to display. Explicitly importing it here creates the set that
+    # ships in Drupal core's shortcut module
+    # (shortcut/config/install/shortcut.set.default.yml).
     shortcut:
       - shortcut.set.default
+    # The same holds for the blocks of the Gin theme (gin/config/optional).
+    # Without them, Gin shows no local actions ("Add user", "Add workflow")
+    # and no local tasks, now that the Navigation top bar does not show them.
+    gin:
+      - block.block.gin_breadcrumbs
+      - block.block.gin_content
+      - block.block.gin_help
+      - block.block.gin_local_actions
+      - block.block.gin_messages
+      - block.block.gin_page_title
+      - block.block.gin_primary_local_tasks
+      - block.block.gin_secondary_local_tasks
   actions:
     # Use Gin as the administration (back-end) theme. This is the headline of
     # the Web Admin module: a polished, productive admin experience.
     system.theme:
       simpleConfigUpdate:
         admin: gin
-    # Editors can open the Editorial dashboard.
-    ?user.role.content_editor:
-      grantPermissions:
-        - 'view editorial dashboard'
