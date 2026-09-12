@@ -15,11 +15,19 @@ install:
   - gin
   - gin_toolbar
   - gin_login
-  - dashboards
+  # The Dashboard module of Drupal CMS: Webmaster, Editorial and Management
+  # dashboards in recipes/default/config.
+  - dashboard
 config:
   strict: false
   import:
-    dashboards: '*'
+    # The views of the dashboards (optional config is not installed by recipes).
+    dashboard:
+      - views.view.dashboard_content
+    node:
+      - views.view.content_recent
+    user:
+      - views.view.who_s_online
     # Config entities (like a shortcut set) are not created automatically
     # when a module is installed through a recipe: Recipe installs run with
     # the config installer in "syncing" mode, which only creates simple
@@ -40,3 +48,7 @@ config:
     system.theme:
       simpleConfigUpdate:
         admin: gin
+    # Editors can open the Editorial dashboard.
+    ?user.role.content_editor:
+      grantPermissions:
+        - 'view editorial dashboard'

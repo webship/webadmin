@@ -7,17 +7,13 @@ Feature: Dashboards bundled with Web Admin
     Given I am a logged in user with the "Webmaster" user
 
   Scenario: The dashboards collection lists every bundled dashboard
-    When I navigate to "/admin/structure/dashboards"
-    Then I should see "Default Dashboard"
-     And I should see "Editorial Dashboard"
-     And I should see "Management Dashboard"
-     And I should see "Webmaster Dashboard"
+    When I navigate to "/admin/structure/dashboard"
+    Then I should see "Webmaster"
+     And I should see "Editorial"
+     And I should see "Management"
 
-  Scenario: The default dashboard renders for an administrator
-    When I navigate to "/dashboard/default_dashboard"
+  Scenario: The webmaster dashboard renders for an administrator
+    When I navigate to "/admin/dashboard/webmaster"
     Then I should not see "Access denied"
      And I should not see "Page not found"
-
-  Scenario: Admin can open the dashboards settings
-    When I navigate to "/admin/system/dashboards-settings"
-    Then I should see the button "Save configuration"
+     And I should see "Site status"

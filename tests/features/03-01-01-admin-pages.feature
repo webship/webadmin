@@ -14,7 +14,7 @@ Feature: Pre-check important administration pages
     When I navigate to "/admin/structure"
     Then I should see "Block layout"
      And I should see "Content types"
-     And I should see "Dashboards"
+     And I should see "Dashboard"
      And I should see "Views"
 
   Scenario: The people page loads

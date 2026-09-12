@@ -1,6 +1,6 @@
 {
   "name": "drupal/webadmin",
-  "description": "Website Administration tools.",
+  "description": "Website Administration tools. Part of Webship: the UI Suite UIkit theme (UIkit and HTMX) on top of Drupal and Display Builder.",
   "type": "drupal-module",
   "homepage": "https://www.drupal.org/project/webpage",
   "license": "GPL-2.0-or-later",
@@ -31,6 +31,6 @@
     "drupal/gin": "~5.0",
     "drupal/gin_toolbar": "~3.0",
     "drupal/gin_login": "~2.1.0",
-    "drupal/dashboards": "~2.1.0"
+    "drupal/dashboard": "^2.2"
   }
 }

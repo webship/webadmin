@@ -1,0 +1,74 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - views.view.content_recent
+  - views.view.dashboard_content
+  module:
+  - dashboard
+  - layout_builder
+  - views
+id: editorial
+label: Editorial
+description: Drafts and content of the current editor.
+layout:
+- layout_id: layout_twocol_section
+  layout_settings:
+    label: ''
+    context_mapping: {}
+    column_widths: 50-50
+  components:
+    dadd36ed-2e7b-58e7-bd0b-59ae5005a467:
+      uuid: dadd36ed-2e7b-58e7-bd0b-59ae5005a467
+      region: first
+      configuration:
+        id: views_block:dashboard_content-block_own_drafts
+        label: ''
+        label_display: visible
+        provider: views
+        context_mapping: {}
+        views_label: ''
+        items_per_page: none
+      weight: 0
+      additional: {}
+    fe88bde0-df65-529d-8526-dcfd9031bea5:
+      uuid: fe88bde0-df65-529d-8526-dcfd9031bea5
+      region: first
+      configuration:
+        id: views_block:dashboard_content-block_edited_content
+        label: ''
+        label_display: visible
+        provider: views
+        context_mapping: {}
+        views_label: ''
+        items_per_page: none
+      weight: 1
+      additional: {}
+    596e75e2-55c7-59d8-a794-20b79d034a83:
+      uuid: 596e75e2-55c7-59d8-a794-20b79d034a83
+      region: second
+      configuration:
+        id: views_block:dashboard_content-block_own_recent_content
+        label: ''
+        label_display: visible
+        provider: views
+        context_mapping: {}
+        views_label: ''
+        items_per_page: none
+      weight: 0
+      additional: {}
+    6852e3e3-8017-5097-b68d-7b4d90dc1f36:
+      uuid: 6852e3e3-8017-5097-b68d-7b4d90dc1f36
+      region: second
+      configuration:
+        id: views_block:content_recent-block_1
+        label: ''
+        label_display: visible
+        provider: views
+        context_mapping: {}
+        views_label: ''
+        items_per_page: none
+      weight: 1
+      additional: {}
+  third_party_settings: {}
+weight: 1

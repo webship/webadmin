@@ -12,7 +12,7 @@ Feature: Web Admin bundled modules are enabled
      And I should see "Masquerade"
      And I should see "Views Bulk Operations"
      And I should see "Views Bulk Edit"
-     And I should see "Dashboards"
+     And I should see "Dashboard"
      And I should see "Content Moderation"
      And I should see "Workflows"
      And I should see "Navigation"

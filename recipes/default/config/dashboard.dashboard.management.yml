@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - views.view.content_recent
+  - views.view.dashboard_content
+  - views.view.who_s_online
+  module:
+  - dashboard
+  - layout_builder
+  - views
+id: management
+label: Management
+description: Site content, recent content and who is online.
+layout:
+- layout_id: layout_threecol_section
+  layout_settings:
+    label: ''
+    context_mapping: {}
+    column_widths: 33-34-33
+  components:
+    9cd271e4-adb6-5d62-8632-a293dd0c72d7:
+      uuid: 9cd271e4-adb6-5d62-8632-a293dd0c72d7
+      region: first
+      configuration:
+        id: views_block:dashboard_content-block_site_content
+        label: ''
+        label_display: visible
+        provider: views
+        context_mapping: {}
+        views_label: ''
+        items_per_page: none
+      weight: 0
+      additional: {}
+    4aac1c8a-09b4-56da-b140-31b2a8a012b5:
+      uuid: 4aac1c8a-09b4-56da-b140-31b2a8a012b5
+      region: second
+      configuration:
+        id: views_block:content_recent-block_1
+        label: ''
+        label_display: visible
+        provider: views
+        context_mapping: {}
+        views_label: ''
+        items_per_page: none
+      weight: 0
+      additional: {}
+    c9b02d7e-d024-5ad2-a0f5-f3725b421a07:
+      uuid: c9b02d7e-d024-5ad2-a0f5-f3725b421a07
+      region: third
+      configuration:
+        id: views_block:who_s_online-who_s_online_block
+        label: ''
+        label_display: visible
+        provider: views
+        context_mapping: {}
+        views_label: ''
+        items_per_page: none
+      weight: 0
+      additional: {}
+  third_party_settings: {}
+weight: 2
