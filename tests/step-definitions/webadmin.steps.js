@@ -34,8 +34,10 @@ Given(/^I am a logged in user with( the)*( username)* "([^"]*)?"( user)?$/, asyn
     throw new Error(`User "${key}" is missing username or password in worldParameters.users`);
   }
   await this.page.goto(`${this.parameters.launchUrl}/user/login`);
-  await this.page.getByLabel('Username').fill(username);
-  await this.page.getByLabel('Password').fill(password);
+  // View Password adds a "Show password" button labeled after the field, so
+  // target the login form inputs by id.
+  await this.page.locator('#edit-name').fill(username);
+  await this.page.locator('#edit-pass').fill(password);
   await this.page.locator('input[value="Log in"]').click();
   await this.page.waitForLoadState('networkidle');
 });

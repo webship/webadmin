@@ -2,15 +2,35 @@ name: Web Admin - Default
 description: A recipe to manage default installed modules, configs and permissions.
 type: install
 install:
-  - content_moderation
-  - workflows
+  # Core administration tools.
+  - announcements_feed
+  - config
+  - contextual
+  - dblog
+  - field_ui
+  - help
+  - node
+  - update
+  - views_ui
   - toolbar
   - shortcut
+  - content_moderation
+  - workflows
+  # Contrib administration tools.
+  - automatic_updates
+  - coffee
+  - drupical
+  - project_browser
+  - sam
+  - tagify
+  - tagify_user_list
+  - view_password
   - views_bulk_operations
   - views_bulk_edit
   - masquerade
-  # The Gin administration theme must be installed before the Gin Toolbar and
-  # Gin Login modules, which build on it.
+  # The Claro and Gin administration themes must be installed before the Gin
+  # Toolbar and Gin Login modules, which build on them.
+  - claro
   - gin
   - gin_toolbar
   - gin_login
@@ -28,9 +48,18 @@ config:
     # (shortcut/config/install/shortcut.set.default.yml).
     shortcut:
       - shortcut.set.default
-    # The same holds for the blocks of the Gin theme (gin/config/optional).
-    # Without them, Gin shows no local actions ("Add user", "Add workflow")
-    # and no local tasks, now that the Navigation top bar does not show them.
+    # The same holds for the blocks of the Claro and Gin themes
+    # (config/optional). Without them, the admin theme shows no local actions
+    # ("Add user", "Add workflow") and no local tasks.
+    claro:
+      - block.block.claro_breadcrumbs
+      - block.block.claro_content
+      - block.block.claro_help
+      - block.block.claro_local_actions
+      - block.block.claro_messages
+      - block.block.claro_page_title
+      - block.block.claro_primary_local_tasks
+      - block.block.claro_secondary_local_tasks
     gin:
       - block.block.gin_breadcrumbs
       - block.block.gin_content
@@ -46,3 +75,40 @@ config:
     system.theme:
       simpleConfigUpdate:
         admin: gin
+    # Edit and add content in the administration theme.
+    node.settings:
+      simpleConfigUpdate:
+        use_admin_theme: true
+    user.settings:
+      simpleConfigUpdate:
+        verify_mail: true
+        register: admin_only
+        cancel_method: user_cancel_block
+    user.role.authenticated:
+      grantPermissions:
+        - 'access coffee'
+        - 'access contextual links'
+        - 'view the administration theme'
+    announcements_feed.settings:
+      simpleConfigUpdate:
+        limit: 2
+    core.menu.static_menu_link_overrides:
+      overrideMenuLinks:
+        announcements_feed.announcement:
+          enabled: false
+    automatic_updates.settings:
+      simpleConfigUpdate:
+        allow_core_minor_updates: true
+    drupical.settings:
+      simpleConfigUpdate:
+        limit: 5
+    project_browser.admin_settings:
+      simpleConfigUpdate:
+        allow_ui_install: true
+        max_selections: 1
+    tagify.settings:
+      simpleConfigUpdate:
+        set_default_widget: true
+    update.settings:
+      simpleConfigUpdate:
+        check.disabled_extensions: true

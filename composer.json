@@ -25,11 +25,18 @@
   "require": {
     "drupal/core": "^11.4 || ^12",
     "drupal/webpatches": "11.0.x-dev",
+    "drupal/automatic_updates": "^4.1",
+    "drupal/coffee": "^2",
+    "drupal/drupical": "^1",
+    "drupal/project_browser": "^2.1-beta3",
+    "drupal/sam": "^1.2",
+    "drupal/tagify": "^1.2",
+    "drupal/view_password": "^6",
     "drupal/views_bulk_operations": "~4.4.0",
     "drupal/views_bulk_edit": "~3.0",
     "drupal/masquerade": "~2.0",
-    "drupal/gin": "~5.0",
+    "drupal/gin": "^5",
     "drupal/gin_toolbar": "~3.0",
-    "drupal/gin_login": "~2.1.0"
+    "drupal/gin_login": "^2.1.4"
   }
 }
