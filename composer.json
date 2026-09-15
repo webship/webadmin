@@ -24,7 +24,6 @@
   },
   "require": {
     "drupal/core": "^11.4 || ^12",
-    "drupal/webpatches": "11.0.x-dev",
     "drupal/automatic_updates": "^4.1",
     "drupal/coffee": "^2",
     "drupal/drupical": "^1",
