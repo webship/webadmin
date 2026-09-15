@@ -16,7 +16,9 @@ install:
   - shortcut
   - content_moderation
   - workflows
-  # Contrib administration tools.
+  # Contrib administration tools. Package Manager is listed, so the recipe
+  # can set its trusted Composer plugins.
+  - package_manager
   - automatic_updates
   - coffee
   - drupical
@@ -104,6 +106,13 @@ config:
     automatic_updates.settings:
       simpleConfigUpdate:
         allow_core_minor_updates: true
+    # The Webship projects apply their patches with these Composer plugins.
+    # Trust them, so the automatic updates readiness checks pass.
+    package_manager.settings:
+      simpleConfigUpdate:
+        additional_trusted_composer_plugins:
+          - cweagans/composer-patches
+          - webship/patches
     drupical.settings:
       simpleConfigUpdate:
         limit: 5
