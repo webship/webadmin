@@ -34,6 +34,8 @@ install:
   - gin
   - gin_toolbar
   - gin_login
+  # Last, after its dependencies: the Web Admin module itself.
+  - webadmin
 config:
   strict: false
   import:

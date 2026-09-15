@@ -11,7 +11,15 @@ use Drupal\Core\Recipe\RecipeRunner;
 /**
  * Implements hook_install().
  */
-function webadmin_install() {
-  $default_recipe = Recipe::createFromDirectory(__DIR__ . '/recipes/default');
-  RecipeRunner::processRecipe($default_recipe);
+function webadmin_install($is_syncing) {
+  // Configuration imports bring their own configuration.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+
+  // When the module is installed on its own, apply its default recipe. When
+  // the default recipe installs the module, the recipe is already applied.
+  if (!$is_syncing) {
+    RecipeRunner::processRecipe(Recipe::createFromDirectory(__DIR__ . '/recipes/default'));
+  }
 }
