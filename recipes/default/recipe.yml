@@ -86,10 +86,13 @@ config:
         verify_mail: true
         register: admin_only
         cancel_method: user_cancel_block
-    user.role.authenticated:
+    # Content editors get the toolbar, the contextual links and the
+    # administration theme. The Coffee search stays with site administrators,
+    # not every logged-in user.
+    ?user.role.content_editor:
       grantPermissions:
-        - 'access coffee'
         - 'access contextual links'
+        - 'access toolbar'
         - 'view the administration theme'
     announcements_feed.settings:
       simpleConfigUpdate:
