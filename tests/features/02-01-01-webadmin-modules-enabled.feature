@@ -14,8 +14,6 @@ Feature: Web Admin bundled modules are enabled
      And I should see "Views Bulk Edit"
      And I should see "Content Moderation"
      And I should see "Workflows"
-     And I should see "Gin Toolbar"
-     And I should see "Gin Login"
      And I should see "Coffee"
      And I should see "Project Browser"
      And I should see "Automatic Updates"

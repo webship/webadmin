@@ -33,9 +33,6 @@
     "drupal/view_password": "^6",
     "drupal/views_bulk_operations": "~4.4.0",
     "drupal/views_bulk_edit": "~3.0",
-    "drupal/masquerade": "~2.0",
-    "drupal/gin": "^5",
-    "drupal/gin_toolbar": "~3.0",
-    "drupal/gin_login": "^2.1.4"
+    "drupal/masquerade": "~2.0"
   }
 }

@@ -53,7 +53,7 @@ module.exports = {
         filesPath: './tests/selectors/',
         files: [
           'cms-drupal-core-claro.json',
-          'cms-drupal-cms-gin.json',
+          'cms-drupal-cms-default-admin.json',
         ],
         offset: 60,
         breakpoints: {

@@ -30,12 +30,9 @@ install:
   - views_bulk_operations
   - views_bulk_edit
   - masquerade
-  # The Claro and Gin administration themes must be installed before the Gin
-  # Toolbar and Gin Login modules, which build on them.
+  # The administration themes of Drupal core.
   - claro
-  - gin
-  - gin_toolbar
-  - gin_login
+  - default_admin
   # Last, after its dependencies: the Web Admin module itself.
   - webadmin
 config:
@@ -52,7 +49,7 @@ config:
     # (shortcut/config/install/shortcut.set.default.yml).
     shortcut:
       - shortcut.set.default
-    # The same holds for the blocks of the Claro and Gin themes
+    # The same holds for the blocks of the Claro and Default Admin themes
     # (config/optional). Without them, the admin theme shows no local actions
     # ("Add user", "Add workflow") and no local tasks.
     claro:
@@ -64,21 +61,21 @@ config:
       - block.block.claro_page_title
       - block.block.claro_primary_local_tasks
       - block.block.claro_secondary_local_tasks
-    gin:
-      - block.block.gin_breadcrumbs
-      - block.block.gin_content
-      - block.block.gin_help
-      - block.block.gin_local_actions
-      - block.block.gin_messages
-      - block.block.gin_page_title
-      - block.block.gin_primary_local_tasks
-      - block.block.gin_secondary_local_tasks
+    default_admin:
+      - block.block.default_admin_breadcrumbs
+      - block.block.default_admin_content
+      - block.block.default_admin_help
+      - block.block.default_admin_local_actions
+      - block.block.default_admin_messages
+      - block.block.default_admin_page_title
+      - block.block.default_admin_primary_local_tasks
+      - block.block.default_admin_secondary_local_tasks
   actions:
-    # Use Gin as the administration (back-end) theme. This is the headline of
-    # the Web Admin module: a polished, productive admin experience.
+    # Use Default Admin, the administration theme of Drupal core, as the
+    # back-end theme.
     system.theme:
       simpleConfigUpdate:
-        admin: gin
+        admin: default_admin
     # Edit and add content in the administration theme.
     node.settings:
       simpleConfigUpdate:

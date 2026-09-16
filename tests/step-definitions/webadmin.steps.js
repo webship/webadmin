@@ -149,16 +149,19 @@ Then(/^the response body of "([^"]+)" should contain "([^"]*)"$/, async function
 /**
  * Assert that the active admin (back-end) theme is the given machine name.
  *
- * Web Admin sets Gin as the administration theme through its default recipe,
- * so admin pages render with the `gin` body data attribute / class.
+ * Web Admin sets Default Admin, the administration theme of Drupal core, as the
+ * administration theme through its default recipe. A theme ships either in
+ * core or in contrib, so both asset paths count as a match.
  *
- * Example #1: Then the active admin theme should be "gin"
+ * Example #1: Then the active admin theme should be "default_admin"
  */
 Then(/^the active admin theme should be "([^"]+)"$/, async function (theme) {
   await attempt(async () => {
     const html = await this.page.content();
-    const onBody = await this.page.locator(`body.gin--${theme}, html[data-gin-accent], body[class*="${theme}"]`).count();
-    if (onBody === 0 && !html.includes(`/themes/contrib/${theme}/`)) {
+    const onBody = await this.page.locator(`body[class*="${theme}"], html[data-drupal-admin-theme="${theme}"]`).count();
+    if (onBody === 0
+      && !html.includes(`/core/themes/${theme}/`)
+      && !html.includes(`/themes/contrib/${theme}/`)) {
       throw new Error(`Active admin theme does not appear to be "${theme}"`);
     }
   }, `Expected the active admin theme to be "${theme}"`);
