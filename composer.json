@@ -4,11 +4,10 @@
   "type": "drupal-module",
   "homepage": "https://www.drupal.org/project/webpage",
   "license": "GPL-2.0-or-later",
-  "minimum-stability": "dev",
   "authors": [
     {
       "name": "Webship",
-      "homepage": "http://webship.org",
+      "homepage": "https://webship.co",
       "role": "Maintainer"
     }
   ],
