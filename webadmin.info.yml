@@ -7,9 +7,14 @@ core_version_requirement: ^11.4 || ^12
 # them from inside hook_install() would rebuild the container and leave the
 # config installer of the outer batch in syncing mode, so later modules in the
 # batch would lose their default config entities.
-# Toolbar and Shortcut stay in the recipe only: Drupal 12 removes them from
-# core, so a hard dependency would block Drupal 12. The Claro and Default Admin
-# themes stay in the recipe too: a module cannot depend on a theme.
+# Not every module the recipe installs can be a dependency:
+# - Toolbar and Shortcut: Drupal 12 removes them from core, so a hard
+#   dependency would block Drupal 12.
+# - Package Manager and Automatic Updates (which depends on it): Package
+#   Manager refuses to install unless 'testing_package_manager' is TRUE in
+#   settings.php, so a hard dependency makes every install of this module fail
+#   the requirements check. The recipe still installs them.
+# - Claro and the Default Admin theme: a module cannot depend on a theme.
 dependencies:
   - drupal:announcements_feed
   - drupal:config
@@ -22,8 +27,6 @@ dependencies:
   - drupal:views_ui
   - drupal:content_moderation
   - drupal:workflows
-  - drupal:package_manager
-  - automatic_updates:automatic_updates
   - coffee:coffee
   - drupical:drupical
   - project_browser:project_browser
