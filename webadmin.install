@@ -20,6 +20,18 @@ function webadmin_install($is_syncing) {
   // When the module is installed on its own, apply its default recipe. When
   // the default recipe installs the module, the recipe is already applied.
   if (!$is_syncing) {
-    RecipeRunner::processRecipe(Recipe::createFromDirectory(__DIR__ . '/recipes/default'));
+    // The recipe still installs Toolbar, Shortcut and the Default Admin theme,
+    // which cannot be dependencies (see webadmin.info.yml). Installing them
+    // rebuilds the container, and core switches syncing mode off again only on
+    // the new config installer. Switch it off on the config installer that the
+    // module installer of this batch still uses, or the modules installed
+    // after this one lose their default config entities.
+    $config_installer = \Drupal::service('config.installer');
+    try {
+      RecipeRunner::processRecipe(Recipe::createFromDirectory(__DIR__ . '/recipes/default'));
+    }
+    finally {
+      $config_installer->setSyncing(FALSE);
+    }
   }
 }

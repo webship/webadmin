@@ -2,3 +2,35 @@ name: Web Admin
 description: Website Administration tools.
 type: module
 core_version_requirement: ^11.4 || ^12
+# The modules the default recipe installs. Declared here, so Drupal installs
+# them in the same batch before hook_install() applies the recipe: installing
+# them from inside hook_install() would rebuild the container and leave the
+# config installer of the outer batch in syncing mode, so later modules in the
+# batch would lose their default config entities.
+# Toolbar and Shortcut stay in the recipe only: Drupal 12 removes them from
+# core, so a hard dependency would block Drupal 12. The Claro and Default Admin
+# themes stay in the recipe too: a module cannot depend on a theme.
+dependencies:
+  - drupal:announcements_feed
+  - drupal:config
+  - drupal:contextual
+  - drupal:dblog
+  - drupal:field_ui
+  - drupal:help
+  - drupal:node
+  - drupal:update
+  - drupal:views_ui
+  - drupal:content_moderation
+  - drupal:workflows
+  - drupal:package_manager
+  - automatic_updates:automatic_updates
+  - coffee:coffee
+  - drupical:drupical
+  - project_browser:project_browser
+  - sam:sam
+  - tagify:tagify
+  - tagify:tagify_user_list
+  - view_password:view_password
+  - views_bulk_operations:views_bulk_operations
+  - views_bulk_edit:views_bulk_edit
+  - masquerade:masquerade
