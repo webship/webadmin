@@ -20,7 +20,7 @@ function webadmin_install($is_syncing) {
   // When the module is installed on its own, apply its default recipe. When
   // the default recipe installs the module, the recipe is already applied.
   if (!$is_syncing) {
-    // The recipe still installs Toolbar, Shortcut and the Default Admin theme,
+    // The recipe still installs Toolbar, Shortcut and the UIkit Admin theme,
     // which cannot be dependencies (see webadmin.info.yml). Installing them
     // rebuilds the container, and core switches syncing mode off again only on
     // the new config installer. Switch it off on the config installer that the

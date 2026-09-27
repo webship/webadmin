@@ -32,6 +32,7 @@
     "drupal/view_password": "^6",
     "drupal/views_bulk_operations": "~4.4.0",
     "drupal/views_bulk_edit": "~3.0",
-    "drupal/masquerade": "~2.0"
+    "drupal/masquerade": "~2.0",
+    "drupal/uikit_admin": "~4.0"
   }
 }

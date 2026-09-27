@@ -30,9 +30,11 @@ install:
   - views_bulk_operations
   - views_bulk_edit
   - masquerade
-  # The administration themes of Drupal core.
+  # Claro, the administration theme of Drupal core, for the contrib screens
+  # and dialogs built on its styles, and UIkit Admin, the administration
+  # theme of the site.
   - claro
-  - default_admin
+  - uikit_admin
   # Last, after its dependencies: the Web Admin module itself.
   - webadmin
 config:
@@ -49,7 +51,7 @@ config:
     # (shortcut/config/install/shortcut.set.default.yml).
     shortcut:
       - shortcut.set.default
-    # The same holds for the blocks of the Claro and Default Admin themes
+    # The same holds for the blocks of the Claro and UIkit Admin themes
     # (config/optional). Without them, the admin theme shows no local actions
     # ("Add user", "Add workflow") and no local tasks.
     claro:
@@ -61,21 +63,21 @@ config:
       - block.block.claro_page_title
       - block.block.claro_primary_local_tasks
       - block.block.claro_secondary_local_tasks
-    default_admin:
-      - block.block.default_admin_breadcrumbs
-      - block.block.default_admin_content
-      - block.block.default_admin_help
-      - block.block.default_admin_local_actions
-      - block.block.default_admin_messages
-      - block.block.default_admin_page_title
-      - block.block.default_admin_primary_local_tasks
-      - block.block.default_admin_secondary_local_tasks
+    uikit_admin:
+      - block.block.uikit_admin_branding
+      - block.block.uikit_admin_breadcrumbs
+      - block.block.uikit_admin_content
+      - block.block.uikit_admin_help
+      - block.block.uikit_admin_local_actions
+      - block.block.uikit_admin_messages
+      - block.block.uikit_admin_page_title
+      - block.block.uikit_admin_primary_local_tasks
+      - block.block.uikit_admin_secondary_local_tasks
   actions:
-    # Use Default Admin, the administration theme of Drupal core, as the
-    # back-end theme.
+    # Use UIkit Admin as the back-end theme.
     system.theme:
       simpleConfigUpdate:
-        admin: default_admin
+        admin: uikit_admin
     # Edit and add content in the administration theme.
     node.settings:
       simpleConfigUpdate:

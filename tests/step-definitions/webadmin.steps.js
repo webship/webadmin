@@ -153,7 +153,7 @@ Then(/^the response body of "([^"]+)" should contain "([^"]*)"$/, async function
  * administration theme through its default recipe. A theme ships either in
  * core or in contrib, so both asset paths count as a match.
  *
- * Example #1: Then the active admin theme should be "default_admin"
+ * Example #1: Then the active admin theme should be "uikit_admin"
  */
 Then(/^the active admin theme should be "([^"]+)"$/, async function (theme) {
   await attempt(async () => {

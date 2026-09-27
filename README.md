@@ -17,14 +17,16 @@ Maintained by [Webship](https://www.drupal.org/project/webship). Webship and the
 * [Views Bulk Operations](https://www.drupal.org/project/views_bulk_operations): ~4.4.0
 * [Views Bulk Edit](https://www.drupal.org/project/views_bulk_edit): ~3.0
 * [Masquerade](https://www.drupal.org/project/masquerade): ~2.0
+* [UIkit Admin](https://www.drupal.org/project/uikit_admin): ~4.0
 
 The default recipe also installs the core administration tools: Announcements,
 Configuration Manager, Contextual Links, Database Logging, Field UI, Help,
 Update Manager, Views UI, Toolbar, Shortcut, Content Moderation and Workflows.
-It places the Claro and Default Admin blocks (breadcrumbs, content, help, local
-actions, messages, page title, primary and secondary local tasks), makes Default
-Admin, the administration theme of Drupal core, the administration theme for
-content editing, and grants authenticated users the Coffee, contextual links and
+It places the Claro and [UIkit Admin](https://www.drupal.org/project/uikit_admin)
+blocks (breadcrumbs, content, help, local actions, messages, page title, primary
+and secondary local tasks), makes UIkit Admin the administration theme, content
+editing included, shows the log in, password reset and registration screens in
+UIkit Admin (its sign-in page), and grants authenticated users the Coffee, contextual links and
 administration theme permissions.
 
 Web Admin does not install Layout Builder, Navigation or a dashboard module. The

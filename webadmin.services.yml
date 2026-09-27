@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+  # The sign-in screens in UIkit Admin, when it is the administration theme.
+  # Above the administration theme negotiator of core (-40).
+  webadmin.theme.negotiator.sign_in:
+    class: Drupal\webadmin\Theme\SignInThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: -30 }
