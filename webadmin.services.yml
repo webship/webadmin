@@ -7,3 +7,9 @@ services:
     class: Drupal\webadmin\Theme\SignInThemeNegotiator
     tags:
       - { name: theme_negotiator, priority: -30 }
+  # The page layouts of the front theme stay out of the pages another theme
+  # renders, like the sign-in screens in UIkit Admin.
+  webadmin.front_page_layout_subscriber:
+    class: Drupal\webadmin\EventSubscriber\FrontPageLayoutSubscriber
+    tags:
+      - { name: event_subscriber }

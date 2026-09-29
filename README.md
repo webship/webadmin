@@ -29,6 +29,10 @@ editing included, shows the log in, password reset and registration screens in
 UIkit Admin (its sign-in page), and grants authenticated users the Coffee, contextual links and
 administration theme permissions.
 
+On a site with Display Builder page layouts, the layouts of the front theme stay
+out of the pages another theme renders: the sign-in screens keep the UIkit Admin
+page, not the front page layout.
+
 Web Admin does not install Layout Builder, Navigation or a dashboard module. The
 dashboards come from the [Web Dashboard](https://www.drupal.org/project/webdash)
 recipe, built with Display Builder on the
