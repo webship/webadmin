@@ -1,0 +1,14 @@
+webadmin.settings:
+  type: config_object
+  label: 'Web Admin settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    sign_in_theme:
+      type: string
+      label: 'Theme of the sign-in screens'
+      description: 'Which theme serves the log in, log out, password reset and registration screens: "admin" for the administration theme, when it is UIkit Admin, or "default" for the default theme of the site.'
+      constraints:
+        Choice:
+          - admin
+          - default

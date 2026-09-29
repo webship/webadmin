@@ -29,9 +29,21 @@ editing included, shows the log in, password reset and registration screens in
 UIkit Admin (its sign-in page), and grants authenticated users the Coffee, contextual links and
 administration theme permissions.
 
+The `sign_in_theme` setting picks the theme of the sign-in screens (log in, log
+out, password reset and registration). With `admin`, the default, UIkit Admin
+serves them when it is the administration theme. With `default`, the default
+theme of the site serves them, with its own sign-in page:
+
+```bash
+drush config:set webadmin.settings sign_in_theme default -y
+```
+
 On a site with Display Builder page layouts, the layouts of the front theme stay
 out of the pages another theme renders: the sign-in screens keep the UIkit Admin
-page, not the front page layout.
+page, not the front page layout. On the sign-in screens, a page layout stays only
+when it is written for them: the one the active theme chose in its
+`sign_in_page_layout` setting, or one with a "Current theme" condition for the
+active theme. Any other page layout gives way to the sign-in page of the theme.
 
 Web Admin does not install Layout Builder, Navigation or a dashboard module. The
 dashboards come from the [Web Dashboard](https://www.drupal.org/project/webdash)

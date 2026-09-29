@@ -1,14 +1,16 @@
 services:
   _defaults:
     autowire: true
-  # The sign-in screens in UIkit Admin, when it is the administration theme.
-  # Above the administration theme negotiator of core (-40).
+  # The sign-in screens in UIkit Admin, when it is the administration theme
+  # and webadmin.settings:sign_in_theme is "admin". Above the administration
+  # theme negotiator of core (-40).
   webadmin.theme.negotiator.sign_in:
     class: Drupal\webadmin\Theme\SignInThemeNegotiator
     tags:
       - { name: theme_negotiator, priority: -30 }
   # The page layouts of the front theme stay out of the pages another theme
-  # renders, like the sign-in screens in UIkit Admin.
+  # renders, like the sign-in screens in UIkit Admin. The sign-in screens keep
+  # only the page layout written for them.
   webadmin.front_page_layout_subscriber:
     class: Drupal\webadmin\EventSubscriber\FrontPageLayoutSubscriber
     tags:

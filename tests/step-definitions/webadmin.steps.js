@@ -1,6 +1,6 @@
 'use strict';
 
-const { Given, Then, When } = require('@cucumber/cucumber');
+const { After, Given, Then, When } = require('@cucumber/cucumber');
 const { friendly } = require('webship-js/tests/step-definitions/webship');
 
 /**
@@ -181,3 +181,119 @@ Then(/^(?:I |we )?should see the bulk action "([^"]+)"$/, async function (label)
     await option.waitFor({ state: 'attached', timeout: 10000 });
   }, `Expected to find a bulk action option labeled "${label}"`);
 });
+
+/**
+ * Import one simple config value through the single import form, as the
+ * Webmaster, then sign out again.
+ *
+ * @param {object} world
+ *   The Cucumber world.
+ * @param {string} name
+ *   The name of the simple config, like "webadmin.settings".
+ * @param {string} yaml
+ *   The YAML of the whole config object.
+ */
+async function importSimpleConfig(world, name, yaml) {
+  const { username, password } = (world.parameters.users || {}).Webmaster || {};
+  const base = world.parameters.launchUrl;
+  await world.context.clearCookies();
+  await world.page.goto(`${base}/user/login`);
+  await world.page.locator('#edit-name').fill(username);
+  await world.page.locator('#edit-pass').fill(password);
+  await world.page.locator('input[value="Log in"]').click();
+  await world.page.waitForLoadState('networkidle');
+  await world.page.goto(
+    `${base}/admin/config/development/configuration/single/import`,
+  );
+  await world.page
+    .locator('select[name="config_type"]')
+    .selectOption('system.simple');
+  await world.page.locator('input[name="config_name"]').fill(name);
+  await world.page.locator('textarea[name="import"]').fill(yaml);
+  await world.page.locator('input[type="submit"][value="Import"]').click();
+  await world.page.waitForLoadState('networkidle');
+  // The same value again: core refuses the import, and the value is set.
+  const unchanged = await world.page
+    .getByText('There are no changes to import.')
+    .count();
+  if (!unchanged) {
+    await world.page.locator('input[type="submit"][value="Confirm"]').click();
+    await world.page
+      .getByText('The configuration was imported successfully.')
+      .waitFor({ timeout: 30000 });
+  }
+  await world.context.clearCookies();
+}
+
+/**
+ * Choose the theme that serves the sign-in screens.
+ *
+ * "admin" hands them to UIkit Admin, when it is the administration theme.
+ * "default" leaves them to the default theme of the site. Scenarios tagged
+ * @sign-in-theme get "admin" back when they end.
+ *
+ * Example #1: Given the sign-in screens are served by the "default" theme
+ * Example #2: Given the sign-in screens are served by the "admin" theme
+ */
+Given(
+  /^the sign-in screens are served by the "(admin|default)" theme$/,
+  async function (theme) {
+    await attempt(
+      () =>
+        importSimpleConfig(
+          this,
+          'webadmin.settings',
+          `sign_in_theme: ${theme}`,
+        ),
+      `Could not set webadmin.settings:sign_in_theme to "${theme}"`,
+    );
+  },
+);
+
+After({ tags: '@sign-in-theme' }, async function () {
+  await importSimpleConfig(this, 'webadmin.settings', 'sign_in_theme: admin');
+});
+
+/**
+ * Assert that an element with a class that contains a string is (or is not)
+ * on the page.
+ *
+ * Example #1: Then I should see an element with a class containing "uikit-admin-sign-in"
+ * Example #2: Then I should not see an element with a class containing "uikit-admin-"
+ */
+Then(
+  /^(?:I |we )?should( not)? see an element with a class containing "([^"]+)"$/,
+  async function (not, needle) {
+    await attempt(async () => {
+      const count = await this.page.locator(`[class*="${needle}"]`).count();
+      if (not && count > 0) {
+        throw new Error(
+          `Found ${count} element(s) with a class containing "${needle}"`,
+        );
+      }
+      if (!not && count === 0) {
+        throw new Error(`No element has a class containing "${needle}"`);
+      }
+    }, `Unexpected elements with a class containing "${needle}"`);
+  },
+);
+
+/**
+ * Assert that the page loads no asset of a theme.
+ *
+ * Example #1: Then the page should not load the assets of the "uikit_admin" theme
+ */
+Then(
+  /^the page should not load the assets of the "([^"]+)" theme$/,
+  async function (theme) {
+    await attempt(async () => {
+      const html = await this.page.content();
+      if (
+        html.includes(`/themes/contrib/${theme}/`) ||
+        html.includes(`/core/themes/${theme}/`)
+      ) {
+        throw new Error(`The page loads assets of "${theme}"`);
+      }
+    }, `Expected the page not to load the "${theme}" theme`);
+  },
+);

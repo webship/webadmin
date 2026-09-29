@@ -125,3 +125,8 @@ config:
     update.settings:
       simpleConfigUpdate:
         check.disabled_extensions: true
+    # The show password button on the log in form and on the one-time login
+    # form of a password reset.
+    view_password.settings:
+      simpleConfigUpdate:
+        form_ids: 'user_login_form,user_pass_reset'
