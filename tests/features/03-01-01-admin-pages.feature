@@ -30,5 +30,4 @@ Feature: Pre-check important administration pages
 
   Scenario: The appearance page loads
     When I navigate to "/admin/appearance"
-    Then I should see "Default Admin"
-     And I should see "Claro"
+    Then I should see "UIkit Admin"

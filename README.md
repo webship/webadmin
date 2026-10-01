@@ -21,8 +21,8 @@ Maintained by [Webship](https://www.drupal.org/project/webship). Webship and the
 
 The default recipe also installs the core administration tools: Announcements,
 Configuration Manager, Contextual Links, Database Logging, Field UI, Help,
-Update Manager, Views UI, Toolbar, Shortcut, Content Moderation and Workflows.
-It places the Claro and [UIkit Admin](https://www.drupal.org/project/uikit_admin)
+Update Manager, Views UI, Content Moderation and Workflows.
+It places the [UIkit Admin](https://www.drupal.org/project/uikit_admin)
 blocks (breadcrumbs, content, help, local actions, messages, page title, primary
 and secondary local tasks), makes UIkit Admin the administration theme, content
 editing included, shows the log in, password reset and registration screens in

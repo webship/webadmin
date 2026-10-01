@@ -12,8 +12,6 @@ install:
   - node
   - update
   - views_ui
-  - toolbar
-  - shortcut
   - content_moderation
   - workflows
   # Contrib administration tools. Package Manager is listed, so the recipe
@@ -30,39 +28,13 @@ install:
   - views_bulk_operations
   - views_bulk_edit
   - masquerade
-  # Claro, the administration theme of Drupal core, for the contrib screens
-  # and dialogs built on its styles, and UIkit Admin, the administration
-  # theme of the site.
-  - claro
   - uikit_admin
   # Last, after its dependencies: the Web Admin module itself.
   - webadmin
 config:
   strict: false
   import:
-    # Config entities (like a shortcut set) are not created automatically
-    # when a module is installed through a recipe: Recipe installs run with
-    # the config installer in "syncing" mode, which only creates simple
-    # config, not config entities, from a module's config/install directory
-    # (see Drupal\Core\Recipe\RecipeRunner::installModules()). Without this,
-    # no default shortcut set exists, and the shortcuts of the toolbar have
-    # no set to display. Explicitly importing it here creates the set that
-    # ships in Drupal core's shortcut module
-    # (shortcut/config/install/shortcut.set.default.yml).
-    shortcut:
-      - shortcut.set.default
-    # The same holds for the blocks of the Claro and UIkit Admin themes
-    # (config/optional). Without them, the admin theme shows no local actions
-    # ("Add user", "Add workflow") and no local tasks.
-    claro:
-      - block.block.claro_breadcrumbs
-      - block.block.claro_content
-      - block.block.claro_help
-      - block.block.claro_local_actions
-      - block.block.claro_messages
-      - block.block.claro_page_title
-      - block.block.claro_primary_local_tasks
-      - block.block.claro_secondary_local_tasks
+    # Recipe installs skip config entities in config/optional: import them.
     uikit_admin:
       - block.block.uikit_admin_branding
       - block.block.uikit_admin_breadcrumbs
@@ -87,13 +59,10 @@ config:
         verify_mail: true
         register: admin_only
         cancel_method: user_cancel_block
-    # Content editors get the toolbar, the contextual links and the
-    # administration theme. The Coffee search stays with site administrators,
-    # not every logged-in user.
+    # Content editors get contextual links and the admin theme; Coffee stays with site administrators.
     ?user.role.content_editor:
       grantPermissions:
         - 'access contextual links'
-        - 'access toolbar'
         - 'view the administration theme'
     announcements_feed.settings:
       simpleConfigUpdate:
