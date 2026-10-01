@@ -10,5 +10,6 @@ webadmin.settings:
       description: 'Which theme serves the log in, log out, password reset and registration screens: "admin" for the administration theme, when it is UIkit Admin, or "default" for the default theme of the site.'
       constraints:
         Choice:
-          - admin
-          - default
+          choices:
+            - admin
+            - default
