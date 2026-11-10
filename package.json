@@ -21,10 +21,11 @@
     "lint:css": "stylelint \"**/*.css\"",
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --cache --cache-location .eslintcache --ext .yml .",
     "test": "node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "test:headed": "HEADLESS=false node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js"
+    "test:headed": "HEADLESS=false node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
+    "test:dry": "node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js --dry-run"
   },
-  "dependencies": {},
   "devDependencies": {
+    "@webship-js/drupal-core-steps": "^2.1.0",
     "eslint": "^8.0.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.0.0",
@@ -56,7 +57,7 @@
     "underscore": "^1.0.0",
     "webpack": "^5.0.0",
     "webpack-cli": "^5.0.0",
-    "webship-js": "^2.0.0"
+    "webship-js": "^2.0.6"
   },
   "resolutions": {
     "@cucumber/cucumber": "10.0.1"
